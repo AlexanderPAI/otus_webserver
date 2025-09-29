@@ -1,4 +1,4 @@
-// '''WikiMiniAtlas''' 
+// '''WikiMiniAtlas'''
 // Script to embed interactive maps into pages that have coordinate templates
 // also check my user page [[User:Dschwen]] for more tools
 //
@@ -45,7 +45,7 @@ jQuery(function ($) {
    fy:'it plak op in oanpasbere kaart oanjaan',
    gl:'Amosar o lugar nun mapa interactivo',
    he:'הראה מיקום במפה האינטראקטיבית',
-   hi:'सक्रिय नक्शे पर लोकेशन या स्थान दिखायें', 
+   hi:'सक्रिय नक्शे पर लोकेशन या स्थान दिखायें',
    hr:'prikaži lokaciju na interaktivnom zemljovidu',
    hsb:'Městno na interaktiwnej karće zwobraznić',
    hu:'Mutasd a helyet egy interaktív térképen!',
@@ -118,7 +118,7 @@ jQuery(function ($) {
    el:'έξοδος',
    en:'close',
    bn:'বন্ধ করুন',
-   eo:'fermu', 
+   eo:'fermu',
    eu:'itxi',
    es:'cerrar',
    fa:'بستن',
@@ -130,7 +130,7 @@ jQuery(function ($) {
    hi:'बंद करें',
    hr:'zatvori',
    hsb:'začinić',
-   hu:'bezárás', 
+   hu:'bezárás',
    hy:'փակել',
    id:'tutup',
    ilo:'irikep',
@@ -193,7 +193,7 @@ jQuery(function ($) {
 
  language = '', site = '', awt="0",
  iframe = { div: null, iframe: null, closebutton: null, resizebutton: null, resizehelper: null, indom: false },
- 
+
  page_title = (mw.config.get('wgNamespaceNumber')==0) ? encodeURIComponent(mw.config.get('wgTitle')) : '',
 
  bodyc,
@@ -252,7 +252,7 @@ jQuery(function ($) {
   e = e.originalEvent;
   d = e.data.split(',');
   mes = e.source;
-  switch(d[0]) { 
+  switch(d[0]) {
    case 'request' :
     // make a JSON encodable copy of coord_list (no HTML objects!)
     // find center and extent
@@ -292,9 +292,9 @@ jQuery(function ($) {
      }
     }
    case 'unhighlight' :
-    highlight(-1);   
+    highlight(-1);
     break;
-   case 'toggle' : 
+   case 'toggle' :
     coord_list[parseInt(d[1])].mb.click();
     break;
    case 'scroll' :
@@ -306,7 +306,7 @@ jQuery(function ($) {
    case 'highlight' :
     highlight(parseInt(d[1]));
     break;
-  }  
+  }
  }
 
  // parse url parameters into a hash
@@ -342,7 +342,7 @@ jQuery(function ($) {
 
  // remove icons from title coordinates
  $('#coordinates,#coordinates-title,#tpl_Coordinaten').find('a.image').detach();
- 
+
  bodyc = $( wc.onlytitle ? '#coordinates,#coordinates-title' : 'html' );
  startTime = (new Date()).getTime();
 
@@ -350,7 +350,7 @@ jQuery(function ($) {
   var ws, coord_params, params, zoomlevel, globe="Earth";
 
   // check for timeout (every 10 links only)
-  if( key % 10 === 9 && (new Date()).getTime() > startTime + wc.timeout ) { 
+  if( key % 10 === 9 && (new Date()).getTime() > startTime + wc.timeout ) {
    return false; // break out of each
   }
 
@@ -363,7 +363,7 @@ jQuery(function ($) {
   if( RegExp.$8 === 'W' ) { marker.lon*=-1; }
   coord_params = RegExp.$9;
 
-  // Zoom based on coordinate N/S precision 
+  // Zoom based on coordinate N/S precision
   var coord_digits = RegExp.$3 ? 4 : RegExp.$2 ? 2 : RegExp.$1.length - (RegExp.$1+".").indexOf('.') - 1;
   zoomlevel = coord_digits * Math.log(10)/Math.log(2);
 
@@ -400,7 +400,7 @@ jQuery(function ($) {
   }
   mapbutton.addClass('wmamapbutton').attr( {
    title: strings.buttonTooltip[language] || strings.buttonTooltip.en,
-   alt: '' 
+   alt: ''
   } )
   .hover(function (){ $(this).css('opacity', 0.75); }, function () { $(this).css('opacity', ''); })
   .addClass('noprint')
@@ -411,13 +411,13 @@ jQuery(function ($) {
    mapbutton = $('<span>').append(mapbutton).append("&nbsp;WikiMiniAtlas").css('cursor','pointer');
    var tooltip = $('<div>').css( {
     backgroundColor: 'white', padding: '0.2em', border: '1px solid black',
-    position: 'absolute', top: '1em', left: '0em', 
+    position: 'absolute', top: '1em', left: '0em',
     display: 'none', zIndex : 15
    }).append(mapbutton);
-   $(link).wrap( 
+   $(link).wrap(
     $('<span/>')
      .css( { position: 'relative', whiteSpace: 'nowrap' } )
-     .mouseleave( function () { tooltip.fadeOut() } ) 
+     .mouseleave( function () { tooltip.fadeOut() } )
     )
     .before( tooltip )
     .mouseenter( function () { tooltip.fadeIn() } );
@@ -447,15 +447,15 @@ jQuery(function ($) {
   function addTitleButton( alat, alon, zoomlevel ) {
     mapbutton = $('<img>')
      .hover(function (){ $(this).css('opacity', 0.75); }, function () { $(this).css('opacity', ''); })
-     .css('padding', isRTL() ? '0px 3px 0px 0px' : '0px 0px 0px 3px' ).css('cursor', 'pointer')       
+     .css('padding', isRTL() ? '0px 3px 0px 0px' : '0px 0px 0px 3px' ).css('cursor', 'pointer')
      .attr('src', wc.buttonImage).addClass('wmamapbutton').addClass('noprint')
      .bind( 'click', { param:
        alat + '_' + alon + '_' +
        wc.width + '_' + wc.height + '_' +
-       site + '_' + zoomlevel + '_' + language 
+       site + '_' + zoomlevel + '_' + language
       }, showIFrame ); // zoomlevel!
 
-    if(!titlebutton ) { 
+    if(!titlebutton ) {
      if( $('#coordinates').length ) {
       $('#coordinates').find('img').detach();
       $('#coordinates').append(mapbutton);
@@ -577,22 +577,22 @@ window.kml = kml; // DEBUG!
  if ( coordinates !== null ) {
   wi.div = $('<div/>').css( {
    width: (wc.width+2)+'px', height: (wc.height+2)+'px',
-   margin: '0px', padding: '0px', 
+   margin: '0px', padding: '0px',
    backgroundColor : 'white', border: '1px solid gray',
    position: 'absolute', top: '1em', zIndex: 13, boxShadow: '3px 3px 25px rgba(0,0,0,0.3)'
   } ).css( isRTL() ? 'left' : 'right', '2em' ).hide();
 
   var rbrtl = [ '//upload.wikimedia.org/wikipedia/commons/b/b5/Button_resize.png',
                 '//upload.wikimedia.org/wikipedia/commons/3/30/Button_resize_rtl.png' ]
-  wi.resizebutton = $('<img>').attr( { 
+  wi.resizebutton = $('<img>').attr( {
    title : strings.resize[language] || strings.resize.en,
    src : rbrtl[isRTL()?1:0]
   } ).hide().attr('ondragstart','return false');
-  
+
   // cover the iframe to prevent loosing the mouse to the iframe during resizing
   wi.resizehelper = $('<div/>').css( { position: 'absolute', top:0, left:0, zIndex: 20 } ).hide();
 
-  wi.closebutton = $('<img>').attr( { 
+  wi.closebutton = $('<img>').attr( {
    title : strings.close[language] || strings.close.en,
    src : '//upload.wikimedia.org/wikipedia/commons/d/d4/Button_hide.png'
   } ).css( {
@@ -615,28 +615,28 @@ window.kml = kml; // DEBUG!
    function adjusthelper() {
     wi.resizehelper.css( { width: (wc.width+2)+'px', height: (wc.height+2)+'px' } );
    }
-   wi.div.append(  
+   wi.div.append(
     $('<div/>')
      .css( {
-       zIndex : 15, position : 'absolute', bottom : '3px', 
+       zIndex : 15, position : 'absolute', bottom : '3px',
        width : '18px', height: '18px', cursor : (isRTL()?'se-resize':'sw-resize'),
        'user-select': 'none', '-moz-user-select': 'none', '-ms-user-select': 'none'
       } ).css( (isRTL()?'right':'left'), '3px' )
      .mouseenter( function(e) { wi.resizebutton.fadeIn() } )
      .mouseleave( function(e) { if( idle ) { wi.resizebutton.fadeOut(); } } )
      .mousedown( function(e) {
-       if( idle ) { 
+       if( idle ) {
         wi.resizehelper.show();
         adjusthelper();
         lastx = e.pageX;
         lasty = e.pageY;
-        $('body').bind('mouseup.wmaresize', function(e) { 
-         $('body').unbind('mousemove.wmaresize');  
-         $('body').unbind('mouseup.wmaresize'); 
+        $('body').bind('mouseup.wmaresize', function(e) {
+         $('body').unbind('mousemove.wmaresize');
+         $('body').unbind('mouseup.wmaresize');
          idle = true;
          wi.resizehelper.hide();
         } );
-        $('body').bind('mousemove.wmaresize', function(e) { 
+        $('body').bind('mousemove.wmaresize', function(e) {
          wc.width -= dir*(e.pageX-lastx);
          wc.height += (e.pageY-lasty);
          lastx = e.pageX; lasty = e.pageY;
@@ -647,7 +647,7 @@ window.kml = kml; // DEBUG!
         idle = false;
        }
       } )
-     .append(wi.resizebutton) 
+     .append(wi.resizebutton)
    );
   })();
 

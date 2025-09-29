@@ -138,9 +138,9 @@ window.pg || $(document).ready( function($) {
                             }
                     }, timerLength);
             }, isTouchscreen ? undefined : function(){clearTimeout(showTimer); hide(this); } )
- 
+
         } );
-        
+
     }
 
 } );
