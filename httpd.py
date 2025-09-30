@@ -22,33 +22,15 @@ def handle_request(client_socket):
         # 3 split headers to methods
         method = headers.split(" ")[0]
 
-        try:
+        response = (
+            "HTTP/1.1 200 OK\r\n"
+            "Content-Type: text/plain; charset=utf-8\r\n"
+            "Connection: close\r\n"
+            "\r\n"
+        )
 
-            # 4 give back response index.html
-            with open("httptest/wikipedia_russia.html", "r", encoding="utf-8") as file:
-                content = file.read()
-
-            # create response and send it back
-            response_headers = [
-                "HTTP/1.1 200 OK",
-                "Content-Type: text/html; charset=utf-8",
-                f"Content-Length: {len(content.encode('utf-8'))}",
-                "Connection: close",
-                "",
-            ]
-
-            response_headers_str = "\r\n".join(response_headers)
-            client_socket.sendall(response_headers_str.encode("utf-8"))
-
-            if method == "HEAD":
-                client_socket.sendall(b"\r\n")
-
-            if method == "GET":
-                client_socket.sendall(content.encode("utf-8"))
-
-        except Exception:
-            error_response = "HTTP/1.1 404 Not Found\r\n\r\n"
-            client_socket.sendall(error_response.encode("utf-8"))
+        if method == "GET":
+            client_socket.send(response.encode("utf-8"))
 
     finally:
         client_socket.close()
